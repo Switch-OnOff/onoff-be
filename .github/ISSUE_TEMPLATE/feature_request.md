@@ -1,7 +1,7 @@
 ---
 name: ✨ 기능 요청
 about: 새로운 기능이나 개선 사항을 요청할 때 사용
-title: "[FEAT Request] "
+title: "[FEAT] "
 labels: enhancement
 assignees: ''
 
