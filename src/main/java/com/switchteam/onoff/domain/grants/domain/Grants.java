@@ -28,11 +28,11 @@ public class Grants {
     private String serviceStatus;
 
     @Lob
-    @Column(name = "selection_criteria")
+    @Column(name = "selection_criteria", columnDefinition = "TEXT")
     private String selectionCriteria;
 
     @Lob
-    @Column(name = "required_documents")
+    @Column(name = "required_documents", columnDefinition = "TEXT")
     private String requiredDocuments;
 
     @Column(name = "service_link", length = 1024)
