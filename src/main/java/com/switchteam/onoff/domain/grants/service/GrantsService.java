@@ -2,7 +2,6 @@ package com.switchteam.onoff.domain.grants.service;
 
 import com.switchteam.onoff.domain.grants.domain.Grants;
 import com.switchteam.onoff.domain.grants.dto.request.GrantValidateRequest;
-import com.switchteam.onoff.domain.grants.dto.request.GrantsFilterRequest;
 import com.switchteam.onoff.domain.grants.dto.response.GrantCheckResponse;
 import com.switchteam.onoff.domain.grants.dto.response.GrantValidateResponse;
 import com.switchteam.onoff.domain.grants.repository.GrantsRepository;
@@ -11,7 +10,9 @@ import com.switchteam.onoff.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -19,14 +20,19 @@ public class GrantsService {
 
     private final GrantsRepository grantsRepository;
 
-    public List<String> getTop5GrantsNames() {
+    public List<Map<String, Object>> getTop5GrantsNames() {
         return grantsRepository.findTop5ByOrderByServiceNameAsc()
                 .stream()
-                .map(Grants::getServiceName)
+                .map(g -> {
+                    Map<String, Object> m = new LinkedHashMap<>();
+                    m.put("serviceId", g.getServiceId());
+                    m.put("serviceName", g.getServiceName());
+                    return m;
+                })
                 .toList();
     }
 
-   // public List<Grants> filterGrants(GrantsFilterRequest grantsFilterRequest) {
+    // public List<Grants> filterGrants(GrantsFilterRequest grantsFilterRequest) {
     //    return grantsRepository.searchGrantsByFilters(grantsFilterRequest);
     //}
 
@@ -82,11 +88,5 @@ public class GrantsService {
     public List<Grants> filterGrants(String serviceStatus, String location, String industry) {
         return grantsRepository.searchGrantsByFilters(serviceStatus, location, industry);
     }
-
-
-
-
-
-
 
 }

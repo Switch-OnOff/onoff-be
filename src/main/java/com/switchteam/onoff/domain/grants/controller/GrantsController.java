@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,11 +21,12 @@ public class GrantsController {
     private final GrantsService grantsService;
 
     @GetMapping("/api/grants/top5")
-    public ResponseEntity<CustomApiResponse<List<String>>> getTop5Grants() {
-        List<String> grantNames = grantsService.getTop5GrantsNames();
+    public ResponseEntity<CustomApiResponse<List<Map<String, Object>>>> getTop5Grants() {
+        List<Map<String, Object>> grantNames = grantsService.getTop5GrantsNames();
         return ResponseEntity.ok(CustomApiResponse.success(
-                SuccessCode.GRANT_TOP5__FETCH_SUCCESS, grantNames));
+                SuccessCode.GRANT_TOP5_FETCH_SUCCESS, grantNames));
     }
+
 
 
     //필터 여러개 선택하는 경우

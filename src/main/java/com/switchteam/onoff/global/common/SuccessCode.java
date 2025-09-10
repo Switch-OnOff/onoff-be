@@ -8,7 +8,7 @@ import lombok.Getter;
 public enum SuccessCode {
 
     LOGIN_SUCCESS(301, "로그인 성공"),
-    GRANT_TOP5__FETCH_SUCCESS(201, "지원금 TOP5 조회 성공"),
+    GRANT_TOP5_FETCH_SUCCESS(201, "지원금 TOP5 조회 성공"),
     GRANT_FILTER_SUCCESS(202, "지원금 필터링 성공"),
     GRANT_VALIDATE_SUCCESS(203, "지원금 받을 수 있는 여부 확인 성공"),
     GRANT_CHECK_SUCCESS(204, "지원금 받을 수 있는 경우 체크리스트 가져오기 성공"),
