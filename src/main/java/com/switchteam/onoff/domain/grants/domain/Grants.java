@@ -29,7 +29,7 @@ public class Grants {
     @Column(name = "service_status", length = 255)
     private String serviceStatus;
 
-    @Column(name = "selection_criteria", length = 2000)
+    @Column(name = "selection_criteria", columnDefinition = "TEXT")
     @Nullable
     private String selectionCriteria;
 
@@ -37,14 +37,14 @@ public class Grants {
     @Nullable
     private String requiredDocuments;
 
-    @Column(name="service_type", length = 2000)
+    @Column(name="service_type", length = 255)
     private String serviceType;
 
     @Nullable
     @Column(name = "service_contents", columnDefinition = "TEXT")
     private String serviceContents;
 
-    @Column(name = "service_link", length = 2000)
+    @Column(name = "service_link", length = 255)
     private String serviceLink;
 
 

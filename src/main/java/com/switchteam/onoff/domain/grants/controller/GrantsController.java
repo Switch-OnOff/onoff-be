@@ -27,8 +27,6 @@ public class GrantsController {
                 SuccessCode.GRANT_TOP5_FETCH_SUCCESS, grantNames));
     }
 
-
-
     //필터 여러개 선택하는 경우
     //@PostMapping("/api/grants/filter")
     //public ResponseEntity<CustomApiResponse<List<Grants>>> GrantsFilter(@RequestBody GrantsFilterRequest grantsFilterRequest) {

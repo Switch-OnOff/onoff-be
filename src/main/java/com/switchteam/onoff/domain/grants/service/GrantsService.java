@@ -73,7 +73,6 @@ public class GrantsService {
                 .selectionCriteria(grant.getSelectionCriteria())
                 .requiredDocuments(grant.getRequiredDocuments())
                 .build();
-
     }
 
     // 키워드 검색
