@@ -1,5 +1,6 @@
 package com.switchteam.onoff.domain.grants.domain;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class Grants {
     private String serviceName;
 
     @Column(length = 255)
+    @Nullable
     private String industry;
 
     @Column(length = 255)
@@ -27,15 +29,22 @@ public class Grants {
     @Column(name = "service_status", length = 255)
     private String serviceStatus;
 
-    @Lob
-    @Column(name = "selection_criteria", columnDefinition = "TEXT")
+    @Column(name = "selection_criteria", length = 2000)
+    @Nullable
     private String selectionCriteria;
 
-    @Lob
     @Column(name = "required_documents", columnDefinition = "TEXT")
+    @Nullable
     private String requiredDocuments;
 
-    @Column(name = "service_link", length = 1024)
+    @Column(name="service_type", length = 2000)
+    private String serviceType;
+
+    @Nullable
+    @Column(name = "service_contents", columnDefinition = "TEXT")
+    private String serviceContents;
+
+    @Column(name = "service_link", length = 2000)
     private String serviceLink;
 
 
