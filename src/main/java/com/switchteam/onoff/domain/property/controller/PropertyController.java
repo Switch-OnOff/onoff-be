@@ -2,6 +2,7 @@ package com.switchteam.onoff.domain.property.controller;
 
 import com.switchteam.onoff.domain.property.dto.PropertyCardDto;
 import com.switchteam.onoff.domain.property.dto.PropertyCreateRequest;
+import com.switchteam.onoff.domain.property.dto.ValidateRequestDto;
 import com.switchteam.onoff.domain.property.service.PropertyService;
 import com.switchteam.onoff.global.common.CustomApiResponse;
 import com.switchteam.onoff.global.common.SuccessCode;
@@ -12,9 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Tag(name = "매물 데이터 API", description = "매물 데이터 관리를 담당하는 API 입니다.")
 @RestController
@@ -47,5 +46,12 @@ public class PropertyController {
         return ResponseEntity.ok(
                 CustomApiResponse.success(SuccessCode.PROPERTY_CARD_DATA_BY_ID_SUCCESS, propertyCardDto)
         );
+    }
+
+    @PostMapping("/validate")
+    @Operation(summary = "진위 여부 확인", description = "사용자의 데이터를 통해 진위 여부를 확인합니다.")
+    public ResponseEntity<CustomApiResponse<Boolean>> isValid(@RequestBody ValidateRequestDto request){
+        boolean valid = propertyService.isValid(request);
+        return ResponseEntity.ok(CustomApiResponse.success(SuccessCode.VALIDATE_SUCCESS, valid));
     }
 }
