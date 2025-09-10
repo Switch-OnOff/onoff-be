@@ -20,7 +20,10 @@ public enum ErrorCode {
     ODCLOUD_CALL_API_ERROR(1010,"API 요청 실패", HttpStatus.INTERNAL_SERVER_ERROR),
     ODCLOUD_DATA_MISSING_ERROR(1011,"응답 데이터가 없습니다.", HttpStatus.NOT_FOUND),
     ODCLOUD_VALID_MISSING_ERROR(1012, "응답값이 없습니다", HttpStatus.NOT_FOUND),
-    ODCLOUD_PARSING_ERROR(1013, "ODCloud 응답 파싱 실패", HttpStatus.BAD_REQUEST);
+    ODCLOUD_PARSING_ERROR(1013, "ODCloud 응답 파싱 실패", HttpStatus.BAD_REQUEST),
+    USER_ALREADY_EXISTS(1014, "이미 존재하는 사용자입니다.", HttpStatus.CONFLICT),
+    PASSWORD_MISMATCH(1015, "비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST),
+    INVALID_PASSWORD(1016, "비밀번호가 올바르지 않습니다.", HttpStatus.UNAUTHORIZED);
 
     private final int code;
     private final String message;
