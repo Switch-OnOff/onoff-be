@@ -3,9 +3,11 @@ package com.switchteam.onoff.domain.chat.service;
 import com.switchteam.onoff.domain.chat.domain.ChatRoom;
 import com.switchteam.onoff.domain.chat.repsoitory.ChatRoomRepository;
 import com.switchteam.onoff.domain.user.domain.User;
+import com.switchteam.onoff.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -13,6 +15,7 @@ import java.util.Optional;
 public class ChatRoomServiceImpl implements ChatRoomService{
 
     private final ChatRoomRepository chatRoomRepository;
+    private final UserService userService;
 
     @Override
     public ChatRoom createRoom(User buyer, User seller) {
@@ -27,6 +30,16 @@ public class ChatRoomServiceImpl implements ChatRoomService{
     @Override
     public Optional<ChatRoom> getRoom(Long roomId) {
         return chatRoomRepository.findById(roomId);
+    }
+
+    @Override
+    public List<ChatRoom> getAllRoomByBuyerId(Long buyerId) {
+        return chatRoomRepository.findAllByBuyerIdOrderByCreatedAtDesc(buyerId);
+    }
+
+    @Override
+    public List<ChatRoom> getAllRoomBySellerId(Long sellerId) {
+        return chatRoomRepository.findAllBySellerIdOrderByCreatedAtDesc(sellerId);
     }
 
     @Override
