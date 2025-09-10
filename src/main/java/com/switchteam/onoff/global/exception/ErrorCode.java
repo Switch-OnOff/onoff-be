@@ -12,6 +12,19 @@ public enum ErrorCode {
     UNAUTHORIZED(1002, "인증되지 않은 사용자입니다.", HttpStatus.UNAUTHORIZED),
     GRANT_NOT_FOUND(1003, "지원금 정보가 존재하지 않습니다.", HttpStatus.NOT_FOUND),
     LOAN_NOT_FOUND(1004, "대출 정보가 존재하지 않습니다.", HttpStatus.NOT_FOUND);
+    USER_NOT_FOUND(1004, "사용자 정보가 존재하지 않습니다.", HttpStatus.NOT_FOUND),
+    PROPERTY_CREATE_ERROR(1005, "DB Insert 실패", HttpStatus.BAD_REQUEST),
+    BNO_NOT_CORRECT(1006,"사업자번호 양식이 맞지 않습니다", HttpStatus.BAD_REQUEST),
+    START_DATE_NOT_CORRECT(1007, "날짜 양식이 맞지 않습니다", HttpStatus.BAD_REQUEST),
+    PNM_IS_EMPTY(1008, "사업자 이름은 필수입니다.", HttpStatus.NOT_FOUND),
+    ODCLOUD_NON_OK_ERROR(1009, "응답이 정상이 아닙니다.", HttpStatus.BAD_REQUEST),
+    ODCLOUD_CALL_API_ERROR(1010,"API 요청 실패", HttpStatus.INTERNAL_SERVER_ERROR),
+    ODCLOUD_DATA_MISSING_ERROR(1011,"응답 데이터가 없습니다.", HttpStatus.NOT_FOUND),
+    ODCLOUD_VALID_MISSING_ERROR(1012, "응답값이 없습니다", HttpStatus.NOT_FOUND),
+    ODCLOUD_PARSING_ERROR(1013, "ODCloud 응답 파싱 실패", HttpStatus.BAD_REQUEST),
+    USER_ALREADY_EXISTS(1014, "이미 존재하는 사용자입니다.", HttpStatus.CONFLICT),
+    PASSWORD_MISMATCH(1015, "비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST),
+    INVALID_PASSWORD(1016, "비밀번호가 올바르지 않습니다.", HttpStatus.UNAUTHORIZED);
 
     private final int code;
     private final String message;
