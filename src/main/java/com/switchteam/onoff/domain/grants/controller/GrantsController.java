@@ -85,4 +85,14 @@ public class GrantsController {
         );
     }
 
+    @GetMapping("/api/grants/{serviceId}")
+    @Operation(summary = "지원금 상세 조회", description = "serviceId로 지원금의 모든 정보를 조회하는 API")
+    public ResponseEntity<CustomApiResponse<Grants>> getGrantById(@PathVariable Long serviceId) {
+        Grants grant = grantsService.getGrantById(serviceId);
+        return ResponseEntity.ok(
+                CustomApiResponse.success(SuccessCode.GRANT_DETAIL_SUCCESS, grant)
+        );
+    }
+
+
 }
