@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public enum SuccessCode {
 
+    SIGNUP_SUCCESS(300, "회원가입 성공"),
     LOGIN_SUCCESS(301, "로그인 성공"),
     GRANT_TOP5_FETCH_SUCCESS(201, "지원금 TOP5 조회 성공"),
     GRANT_FILTER_SUCCESS(202, "지원금 필터링 성공"),
@@ -21,4 +22,5 @@ public enum SuccessCode {
 
     private final int code;
     private final String message;
+
 }
