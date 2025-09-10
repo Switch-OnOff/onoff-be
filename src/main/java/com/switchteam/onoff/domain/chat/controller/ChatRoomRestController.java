@@ -2,7 +2,7 @@ package com.switchteam.onoff.domain.chat.controller;
 
 import com.switchteam.onoff.domain.chat.dto.ChatRoomResponseDto;
 import com.switchteam.onoff.domain.chat.service.ChatRoomRoleService;
-import com.switchteam.onoff.domain.user.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Tag(name = "채팅 관련 API", description = "채팅 관련 API입니다")
 @RestController
 @RequestMapping("/api/chat/rooms")
 @RequiredArgsConstructor
