@@ -15,7 +15,8 @@ public enum SuccessCode {
     FILTER_SUCCESS(205, "필터링 성공"),
     GRANT_SEARCH_SUCCESS(206, "지원금 검색 성공"),
     PROPERTY_CARD_DATA_SUCCESS(200, "카드 리스트 조회 성공"),
-    PROPERTY_CARD_DATA_BY_ID_SUCCESS(200, "id로 카드 데이터 조회 성공");
+    PROPERTY_CARD_DATA_BY_ID_SUCCESS(200, "id로 카드 데이터 조회 성공"),
+    PROPERTY_INSERT_SUCCESS(200, "DB 저장 성공");
 
     private final int code;
     private final String message;
