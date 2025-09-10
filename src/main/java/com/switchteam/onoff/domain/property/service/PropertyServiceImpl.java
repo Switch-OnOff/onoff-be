@@ -4,11 +4,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.switchteam.onoff.domain.property.dto.PropertyCardDto;
 import com.switchteam.onoff.domain.property.dto.PropertyCreateRequest;
-import com.switchteam.onoff.domain.property.dto.ValidateRequest;
+import com.switchteam.onoff.domain.property.dto.ValidateRequestDto;
 import com.switchteam.onoff.domain.property.entity.Property;
 import com.switchteam.onoff.domain.property.entity.PropertyLeaseCost;
 import com.switchteam.onoff.domain.property.entity.PropertyLocation;
 import com.switchteam.onoff.domain.property.repository.PropertyRepository;
+import com.switchteam.onoff.global.exception.CustomException;
+import com.switchteam.onoff.global.exception.ErrorCode;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +21,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -33,14 +33,8 @@ public class PropertyServiceImpl implements PropertyService {
     private final ObjectMapper objectMapper;
     private final WebClient odcloud;
 
-    @Value("${odcloud.base-url}")
-    private String validateUrl;
-
     @Value("${odcloud.service-key}")
     private String serviceKey;
-
-    @Value("${odcloud.return-type:JSON}")
-    private String returnType;
 
     @Override
     @Transactional
@@ -105,20 +99,20 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public boolean isValid(ValidateRequest request) {
+    public boolean isValid(ValidateRequestDto request) {
         // 0) 입력 정규화
-        String bNo = nz(request.getB_no()).replaceAll("\\D", "");
-        String startDt = nz(request.getStart_dt()).replaceAll("\\D", "");
-        String pNm = nz(request.getP_nm()).trim();
+        String bNo = nz(request.getBNo()).replaceAll("\\D", "");
+        String startDt = nz(request.getStartDt()).replaceAll("\\D", "");
+        String pNm = nz(request.getPNm()).trim();
 
         if (bNo.length() != 10) {
-            throw new IllegalArgumentException("b_no must be 10 digits (no hyphen). input=" + bNo);
+            throw new CustomException(ErrorCode.BNO_NOT_CORRECT);
         }
         if (startDt.length() != 8) {
-            throw new IllegalArgumentException("start_dt must be YYYYMMDD (8 digits). input=" + startDt);
+            throw new CustomException(ErrorCode.START_DATE_NOT_CORRECT);
         }
         if (pNm.isEmpty()) {
-            throw new IllegalArgumentException("p_nm is required.");
+            throw new CustomException(ErrorCode.PNM_IS_EMPTY);
         }
 
         // 1) body 구성
@@ -155,9 +149,9 @@ public class PropertyServiceImpl implements PropertyService {
                             .queryParam("returnType", "JSON")
                             .build(keyTrim)
                     )
-                    .contentType(MediaType.APPLICATION_JSON) // 반드시 application/json
+                    .contentType(MediaType.APPLICATION_JSON)
                     .accept(MediaType.APPLICATION_JSON)
-                    .bodyValue(body) // Jackson이 JSON 변환
+                    .bodyValue(body)
                     .retrieve()
                     .onStatus(
                             status -> status.is4xxClientError() || status.is5xxServerError(),
@@ -169,7 +163,7 @@ public class PropertyServiceImpl implements PropertyService {
                     .bodyToMono(String.class)
                     .block();
         } catch (Exception e) {
-            throw new RuntimeException("ODCloud API call failed", e);
+            throw new CustomException(ErrorCode.ODCLOUD_CALL_API_ERROR);
         }
 
         // 4) 응답 파싱
@@ -177,29 +171,28 @@ public class PropertyServiceImpl implements PropertyService {
             JsonNode root = objectMapper.readTree(response);
             String statusCode = root.path("status_code").asText(null);
             if (!"OK".equalsIgnoreCase(statusCode)) {
-                throw new IllegalArgumentException("ODCloud non-OK: " + response);
+                throw new CustomException(ErrorCode.ODCLOUD_NON_OK_ERROR);
             }
 
             JsonNode data = root.path("data");
-            if (!data.isArray() || data.size() == 0) {
-                throw new IllegalStateException("ODCloud response missing data: " + response);
+            if (!data.isArray() || data.isEmpty()) {
+                throw new CustomException(ErrorCode.ODCLOUD_DATA_MISSING_ERROR);
             }
 
             String valid = data.get(0).path("valid").asText(null); // "01"|"02"
             log.info("[ODCLOUD][RES] valid={}", valid);
 
             if (valid == null) {
-                throw new IllegalStateException("ODCloud response missing valid: " + response);
+                throw new CustomException(ErrorCode.ODCLOUD_VALID_MISSING_ERROR);
             }
 
             return "01".equals(valid);
         } catch (RuntimeException re) {
             throw re;
         } catch (Exception e) {
-            throw new RuntimeException("ODCloud 응답 파싱 실패: " + response, e);
+            throw new CustomException(ErrorCode.ODCLOUD_PARSING_ERROR);
         }
     }
-
 
     private String nz(String v) { return v == null ? "" : v; }
 

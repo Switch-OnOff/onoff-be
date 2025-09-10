@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ValidateRequest {
+public class ValidateRequestDto {
     @JsonProperty("b_no")
-    private String b_no;
+    private String bNo;
 
     @JsonProperty("start_dt")
-    private String start_dt;
+    private String startDt;
 
     @JsonProperty("p_nm")
-    private String p_nm;
+    private String pNm;
 }

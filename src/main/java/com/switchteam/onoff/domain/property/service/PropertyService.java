@@ -2,10 +2,9 @@ package com.switchteam.onoff.domain.property.service;
 
 import com.switchteam.onoff.domain.property.dto.PropertyCardDto;
 import com.switchteam.onoff.domain.property.dto.PropertyCreateRequest;
-import com.switchteam.onoff.domain.property.dto.ValidateRequest;
+import com.switchteam.onoff.domain.property.dto.ValidateRequestDto;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface PropertyService {
 
@@ -18,5 +17,5 @@ public interface PropertyService {
     // id로 카드 데이터 가져오기
     PropertyCardDto findCardDataById(Long id);
 
-    boolean isValid(ValidateRequest request);
+    boolean isValid(ValidateRequestDto request);
 }
