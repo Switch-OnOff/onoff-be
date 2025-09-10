@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GrantValidateRequest {
+public class GrantValidateRequestDto {
     private String serviceStatus;
     private String location;
     private String industry;

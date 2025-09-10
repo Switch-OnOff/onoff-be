@@ -1,6 +1,8 @@
 package com.switchteam.onoff.domain.loan.controller;
 
 import com.switchteam.onoff.domain.loan.domain.Loan;
+import com.switchteam.onoff.domain.loan.dto.request.LoanEvaluateRequestDto;
+import com.switchteam.onoff.domain.loan.dto.response.LoanEvaluateResponseDto;
 import com.switchteam.onoff.domain.loan.service.LoanService;
 import com.switchteam.onoff.global.common.CustomApiResponse;
 import com.switchteam.onoff.global.common.SuccessCode;
@@ -8,10 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -51,6 +50,16 @@ public class LoanController {
         return ResponseEntity.ok(
                 CustomApiResponse.success(SuccessCode.LOAN_DETAIL_SUCCESS, loan)
         );
+    }
+
+    @PostMapping("/api/loan/{loanId}/evaluate")
+    @Operation(summary = "특정 대출 신호등 평가", description = "loanId에 해당하는 대출상품을 사용자 조건으로 평가")
+    public ResponseEntity<LoanEvaluateResponseDto> evaluateLoan(
+            @PathVariable Long loanId,
+            @RequestBody LoanEvaluateRequestDto loanEvaluateRequestDto) {
+
+        LoanEvaluateResponseDto result = loanService.evaluateLoan(loanId, loanEvaluateRequestDto);
+        return ResponseEntity.ok(result);
     }
 
 

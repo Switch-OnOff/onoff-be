@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class GrantsFilterRequest {
+public class GrantsFilterRequestDto {
 
     private List<String> serviceStatus;
     private List<String> location;

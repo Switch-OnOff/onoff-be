@@ -1,6 +1,8 @@
 package com.switchteam.onoff.domain.loan.service;
 
 import com.switchteam.onoff.domain.loan.domain.Loan;
+import com.switchteam.onoff.domain.loan.dto.request.LoanEvaluateRequestDto;
+import com.switchteam.onoff.domain.loan.dto.response.LoanEvaluateResponseDto;
 
 import java.util.List;
 import java.util.Map;
@@ -12,4 +14,7 @@ public interface LoanService {
     List<Loan> filterLoans(String eligibleGroup, String loanType, String interestType, String repaymentMethod);
 
     Loan getLoanById(Long loanId);
+
+    LoanEvaluateResponseDto evaluateLoan(Long loanId, LoanEvaluateRequestDto request);
+
 }
