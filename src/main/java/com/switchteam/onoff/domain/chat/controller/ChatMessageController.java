@@ -21,7 +21,7 @@ public class ChatMessageController {
      *
      * @param message 전송될 채팅 메시지. 발신자 정보, 메시지 내용, 소속 채팅방 등의 정보를 포함합니다.
      */
-    @MessageMapping("/chat.sendMessage")
+    @MessageMapping("/chat/sendMessage")
     public void sendMessage(@Payload ChatMessage message) {
         // 1. DB 저장
         ChatMessage savedMessage = chatMessageService.saveMessage(message);
