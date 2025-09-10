@@ -34,12 +34,12 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 
     @Override
     public List<ChatRoom> getAllRoomByBuyerId(Long buyerId) {
-        return chatRoomRepository.findAllByBuyerIdOrderByCreatedAtDesc(buyerId);
+        return chatRoomRepository.findAllByBuyerUserIdOrderByCreatedAtDesc(buyerId);
     }
 
     @Override
     public List<ChatRoom> getAllRoomBySellerId(Long sellerId) {
-        return chatRoomRepository.findAllBySellerIdOrderByCreatedAtDesc(sellerId);
+        return chatRoomRepository.findAllBySellerUserIdOrderByCreatedAtDesc(sellerId);
     }
 
     @Override
