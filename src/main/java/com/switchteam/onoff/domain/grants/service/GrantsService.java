@@ -88,4 +88,10 @@ public class GrantsService {
         return grantsRepository.searchGrantsByFilters(serviceStatus, location, industry);
     }
 
+    public Grants getGrantById(Long serviceId) {
+        return grantsRepository.findById(serviceId)
+                .orElseThrow(() -> new CustomException(ErrorCode.GRANT_NOT_FOUND));
+    }
+
+
 }
