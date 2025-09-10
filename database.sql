@@ -14,7 +14,7 @@ CREATE TABLE `grants` (
                           `service_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
                           `service_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
                           PRIMARY KEY (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=268 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+) ENGINE=InnoDB AUTO_INCREMENT=268 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- PROPERTY
 DROP TABLE IF EXISTS `property`;

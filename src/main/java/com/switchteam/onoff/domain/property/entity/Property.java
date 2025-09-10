@@ -3,6 +3,7 @@ package com.switchteam.onoff.domain.property.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -21,10 +22,10 @@ public class Property {
     private String industry;
 
     @Column(name = "shop_type")
-    private String shop_type;
+    private String shopType;
 
     @Column(name = "transfer_type")
-    private String transfer_type;
+    private String transferType;
 
     @Column(name = "transfer_date")
     private Date transferDate;
@@ -51,7 +52,7 @@ public class Property {
     private String deliveryLevel;
 
     @Column(name = "takeout_level")
-    private String takeout;
+    private String takeoutLevel;
 
     @Column(name = "supply_area")
     private double supplyArea;
@@ -63,10 +64,10 @@ public class Property {
     private String description;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
     @OneToOne(mappedBy = "property", cascade = CascadeType.ALL, optional = false)
     private PropertyLeaseCost leaseCost;
