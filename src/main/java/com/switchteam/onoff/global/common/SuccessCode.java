@@ -13,7 +13,9 @@ public enum SuccessCode {
     GRANT_VALIDATE_SUCCESS(203, "지원금 받을 수 있는 여부 확인 성공"),
     GRANT_CHECK_SUCCESS(204, "지원금 받을 수 있는 경우 체크리스트 가져오기 성공"),
     FILTER_SUCCESS(205, "필터링 성공"),
-    GRANT_SEARCH_SUCCESS(206, "지원금 검색 성공");
+    GRANT_SEARCH_SUCCESS(206, "지원금 검색 성공"),
+    PROPERTY_CARD_DATA_SUCCESS(200, "카드 리스트 조회 성공"),
+    PROPERTY_CARD_DATA_BY_ID_SUCCESS(200, "id로 카드 데이터 조회 성공");
 
     private final int code;
     private final String message;
