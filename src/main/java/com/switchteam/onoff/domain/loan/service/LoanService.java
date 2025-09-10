@@ -10,4 +10,6 @@ public interface LoanService {
     List<Map<String, Object>> getTop5LoanNames();
 
     List<Loan> filterLoans(String eligibleGroup, String loanType, String interestType, String repaymentMethod);
+
+    Loan getLoanById(Long loanId);
 }

@@ -2,6 +2,8 @@ package com.switchteam.onoff.domain.loan.service;
 
 import com.switchteam.onoff.domain.loan.domain.Loan;
 import com.switchteam.onoff.domain.loan.repository.LoanRepository;
+import com.switchteam.onoff.global.exception.CustomException;
+import com.switchteam.onoff.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,12 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public List<Loan> filterLoans(String eligibleGroup, String loanType, String interestType, String repaymentMethod) {
         return loanRepository.searchLoansByFilters(eligibleGroup, loanType, interestType, repaymentMethod);
+    }
+
+    @Override
+    public Loan getLoanById(Long loanId) {
+        return loanRepository.findById(loanId)
+                .orElseThrow(() -> new CustomException(ErrorCode.LOAN_NOT_FOUND));
     }
 
 }

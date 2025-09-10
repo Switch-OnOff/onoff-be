@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,4 +44,14 @@ public class LoanController {
                 CustomApiResponse.success(SuccessCode.LOAN_FILTER_SUCCESS, filteredLoans)
         );
     }
+    @GetMapping("/api/loan/{loanId}")
+    @Operation(summary = "대출 상세 조회", description = "loanId로 대출의 모든 정보를 조회하는 API")
+    public ResponseEntity<CustomApiResponse<Loan>> getLoanById(@PathVariable Long loanId) {
+        Loan loan = loanService.getLoanById(loanId);
+        return ResponseEntity.ok(
+                CustomApiResponse.success(SuccessCode.LOAN_DETAIL_SUCCESS, loan)
+        );
+    }
+
+
 }
