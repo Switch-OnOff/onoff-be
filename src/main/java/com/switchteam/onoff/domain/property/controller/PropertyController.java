@@ -23,6 +23,7 @@ public class PropertyController {
     private final PropertyService propertyService;
 
     @PostMapping("/")
+    @Operation(summary = "매물 정보 등록", description = "매물 정보를 등록합니다.")
     public ResponseEntity<CustomApiResponse<PropertyCreateRequest>> insertProperty(@RequestBody PropertyCreateRequest request){
         Long id = propertyService.createProperty(request);
         if(id == null){
@@ -49,6 +50,7 @@ public class PropertyController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "매물 데이터 삭제", description = "해당 id의 매물 데이터를 삭제합니다.")
     public ResponseEntity<CustomApiResponse<Void>> deleteProperty(@PathVariable Long id) {
         propertyService.deleteProperty(id);
         return ResponseEntity.ok(CustomApiResponse.success((SuccessCode.DELETE_PROPERTY_SUCCESS)));
