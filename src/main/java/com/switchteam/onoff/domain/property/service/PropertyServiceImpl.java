@@ -99,6 +99,11 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
+    public void deleteProperty(Long id){
+        propertyRepository.deleteById(id);
+    }
+
+    @Override
     public boolean isValid(ValidateRequestDto request) {
         // 0) 입력 정규화
         String bNo = nz(request.getBNo()).replaceAll("\\D", "");

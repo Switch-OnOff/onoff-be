@@ -18,4 +18,6 @@ public interface PropertyService {
     PropertyCardDto findCardDataById(Long id);
 
     boolean isValid(ValidateRequestDto request);
+
+    void deleteProperty(Long id);
 }

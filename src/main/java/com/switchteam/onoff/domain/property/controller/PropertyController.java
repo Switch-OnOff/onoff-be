@@ -48,6 +48,12 @@ public class PropertyController {
         );
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CustomApiResponse<Void>> deleteProperty(@PathVariable Long id) {
+        propertyService.deleteProperty(id);
+        return ResponseEntity.ok(CustomApiResponse.success((SuccessCode.DELETE_PROPERTY_SUCCESS)));
+    }
+
     @PostMapping("/validate")
     @Operation(summary = "진위 여부 확인", description = "사용자의 데이터를 통해 진위 여부를 확인합니다.")
     public ResponseEntity<CustomApiResponse<Boolean>> isValid(@RequestBody ValidateRequestDto request){
