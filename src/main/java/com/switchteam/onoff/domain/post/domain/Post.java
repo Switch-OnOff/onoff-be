@@ -7,6 +7,8 @@ import com.switchteam.onoff.global.exception.CustomException;
 import com.switchteam.onoff.global.exception.ErrorCode;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,8 +38,12 @@ public class Post {
     @Column(columnDefinition = "TEXT")
     private String analysisResult;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
+    @UpdateTimestamp
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     // Post : PostImage = 1 : N
