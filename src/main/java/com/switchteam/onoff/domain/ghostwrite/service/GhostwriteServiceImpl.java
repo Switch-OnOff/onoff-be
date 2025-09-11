@@ -71,6 +71,8 @@ public class GhostwriteServiceImpl implements GhostwriteService {
         for (String sentence : sentences) {
             prompt.append("- ").append(sentence).append("\n");
         }
+        prompt.append("현재 내가 곧 가게를 폐업하는 입장에서 이 글을 작성하고 있어\n");
+        prompt.append("내가 쓴 문장들을 이용하여 구매자에게 현재 내 가게의 정보를 최대한 잘 전달할 수 있도록 해줘.\n");
         prompt.append("글의 길이는 200자 이상으로 해줘. 반환 값은 String 형태로만 반환할 것.");
         return prompt.toString();
     }
