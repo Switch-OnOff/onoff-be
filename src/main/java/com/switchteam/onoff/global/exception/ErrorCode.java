@@ -30,7 +30,9 @@ public enum ErrorCode {
     IMAGE_LIMIT_EXCEEDED(1017, "이미지는 최대 5장까지 업로드 가능합니다.", HttpStatus.BAD_REQUEST),
     POST_IMAGE_NOT_FOUND(1018, "해당 매물의 이미지를 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
     IMAGE_CONVERSION_FAILED(1019, "이미지 변환에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
-    CHATROOM_NOT_FOUND(1020, "채팅방을 찾을 수 없습니다.", HttpStatus.NOT_FOUND);
+    CHATROOM_NOT_FOUND(1020, "채팅방을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
+    IMAGE_TRANSPORT_ERROR(1021, "이미지 전송에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+    OPENAI_ANALYSIS_ERROR(1022, "OpenAI 분석에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 
     private final int code;
     private final String message;
