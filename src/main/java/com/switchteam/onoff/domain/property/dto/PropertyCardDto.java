@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class PropertyCardDto {
     private Long id;
     private String industry;
+    private String transactionType;
     private Integer rent;
     private Integer deposit;
     private Integer salePrice;
