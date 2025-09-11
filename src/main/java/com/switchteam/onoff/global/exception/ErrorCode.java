@@ -32,7 +32,8 @@ public enum ErrorCode {
     IMAGE_CONVERSION_FAILED(1019, "이미지 변환에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
     CHATROOM_NOT_FOUND(1020, "채팅방을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
     IMAGE_TRANSPORT_ERROR(1021, "이미지 전송에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
-    OPENAI_ANALYSIS_ERROR(1022, "OpenAI 분석에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+    OPENAI_ANALYSIS_ERROR(1022, "OpenAI 분석에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+    PROPERTY_NOT_FOUND(1023, "매물 정보가 존재하지 않습니다.", HttpStatus.NOT_FOUND);
 
     private final int code;
     private final String message;

@@ -11,5 +11,6 @@ import java.util.List;
 @Setter
 public class PostRequestDto {
     private String content;
+    private Long propertyId;
     private List<MultipartFile> images = new ArrayList<>();
 }

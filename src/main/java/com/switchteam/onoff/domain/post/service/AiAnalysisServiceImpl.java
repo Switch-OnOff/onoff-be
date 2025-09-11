@@ -108,6 +108,7 @@ public class AiAnalysisServiceImpl implements AiAnalysisService {
             "imageAnalysis": "예: 이미지에서 밝고 현대적인 인테리어 확인, 주점 분위기 강조"
         }
         """);
+        prompt.append("레스토랑 같은 범위 말고 치킨집, 한식집, 중식집 처럼 좀더 카테고리를 세분화 할 것.\n");
         prompt.append("위 5개 키만 사용하고, 절대로 다른 키나 설명 텍스트를 추가하지 말 것.\n");
         prompt.append("각 항목을 최대한 구체적으로 작성할 것.\n");
 

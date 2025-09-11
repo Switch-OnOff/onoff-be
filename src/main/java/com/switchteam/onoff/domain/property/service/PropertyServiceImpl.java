@@ -211,4 +211,9 @@ public class PropertyServiceImpl implements PropertyService {
 
     private String nz(String v) { return v == null ? "" : v; }
 
+    @Override
+    public Property getPropertyById(Long id) {
+        return propertyRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.PROPERTY_NOT_FOUND));
+    }
 }
