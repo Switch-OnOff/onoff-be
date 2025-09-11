@@ -1,6 +1,7 @@
 package com.switchteam.onoff.domain.property.service;
 
 import com.switchteam.onoff.domain.property.dto.*;
+import com.switchteam.onoff.domain.property.entity.Property;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface PropertyService {
     boolean isValid(ValidateRequestDto request);
 
     void deleteProperty(Long id);
+
+    Property getPropertyById(Long id);
 }

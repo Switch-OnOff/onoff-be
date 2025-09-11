@@ -2,6 +2,7 @@ package com.switchteam.onoff.domain.post.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.switchteam.onoff.domain.property.entity.Property;
 import com.switchteam.onoff.domain.user.domain.User;
 import com.switchteam.onoff.global.exception.CustomException;
 import com.switchteam.onoff.global.exception.ErrorCode;
@@ -11,7 +12,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,6 +31,11 @@ public class Post {
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "property_id", unique = true)
+    @JsonBackReference
+    private Property property;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
