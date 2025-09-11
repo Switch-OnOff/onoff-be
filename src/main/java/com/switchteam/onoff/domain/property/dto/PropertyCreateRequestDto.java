@@ -9,7 +9,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
-public class PropertyCreateRequest {
+public class PropertyCreateRequestDto {
     //Property -----------------------
     private String storeName;
     private String industry;

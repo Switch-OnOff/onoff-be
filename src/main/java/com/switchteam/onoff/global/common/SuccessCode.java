@@ -22,7 +22,8 @@ public enum SuccessCode {
     GRANT_DETAIL_SUCCESS(207, "지원금 상세 조회 성공"),
     LOAN_FILTER_SUCCESS(208, "대출 필터링 성공"),
     LOAN_DETAIL_SUCCESS(209, "대출 상세 조회 성공"),
-    DELETE_PROPERTY_SUCCESS(200, "매물 데이터 삭제 성공");
+    DELETE_PROPERTY_SUCCESS(200, "매물 데이터 삭제 성공"),
+    PROPERTY_LOCATION_SUCCESS(200, "매물 위치 데이터 리스트 조회 성공");
 
     private final int code;
     private final String message;

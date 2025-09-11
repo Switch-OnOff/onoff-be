@@ -1,6 +1,6 @@
 package com.switchteam.onoff.domain.user.controller;
 
-import com.switchteam.onoff.domain.property.dto.PropertyCreateRequest;
+import com.switchteam.onoff.domain.property.dto.PropertyCreateRequestDto;
 import com.switchteam.onoff.domain.user.converter.UserLoginConverter;
 import com.switchteam.onoff.domain.user.domain.User;
 import com.switchteam.onoff.domain.user.dto.UserLoginRequestDto;
@@ -25,7 +25,7 @@ public class UserAuthController {
     private final UserAuthService userAuthService;
 
     @PostMapping("/signup")
-    public ResponseEntity<CustomApiResponse<PropertyCreateRequest>> register(@RequestBody @Valid UserSignupRequestDto dto) {
+    public ResponseEntity<CustomApiResponse<PropertyCreateRequestDto>> register(@RequestBody @Valid UserSignupRequestDto dto) {
         User user = userAuthService.register(dto);
         return ResponseEntity.ok(CustomApiResponse.success(SuccessCode.SIGNUP_SUCCESS));
     }
