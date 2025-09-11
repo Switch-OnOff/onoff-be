@@ -2,6 +2,7 @@ package com.switchteam.onoff.domain.property.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -63,6 +64,7 @@ public class Property {
     @Column(name = "description")
     private String description;
 
+    @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 

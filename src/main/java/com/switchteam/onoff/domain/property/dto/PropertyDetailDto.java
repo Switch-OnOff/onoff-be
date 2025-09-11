@@ -15,8 +15,8 @@ import java.util.Date;
 public class PropertyDetailDto {
     private Long id;
     private String storeName;
-    private String industry;
-    private String shoType;
+    private String industry; //업종
+    private String shoType; //상가타입
     private String transferType;
     private Date transferDate;
     private int currentFloor;
