@@ -1,10 +1,14 @@
 package com.switchteam.onoff.domain.user.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.switchteam.onoff.domain.post.domain.Post;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -32,4 +36,9 @@ public class User {
     private String password; // 암호화 저장
 
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    // User : Post = 1 : N
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Post> posts = new ArrayList<>();
 }
