@@ -22,12 +22,12 @@ public class PropertyController {
 
     @PostMapping("/")
     @Operation(summary = "매물 정보 등록", description = "매물 정보를 등록합니다.")
-    public ResponseEntity<CustomApiResponse<PropertyCreateRequestDto>> insertProperty(@RequestBody PropertyCreateRequestDto request){
+    public ResponseEntity<CustomApiResponse<Long>> insertProperty(@RequestBody PropertyCreateRequestDto request){
         Long id = propertyService.createProperty(request);
         if(id == null){
             return ResponseEntity.ok(CustomApiResponse.error(ErrorCode.PROPERTY_CREATE_ERROR));
         }
-        return ResponseEntity.ok(CustomApiResponse.success(SuccessCode.PROPERTY_INSERT_SUCCESS));
+        return ResponseEntity.ok(CustomApiResponse.success(SuccessCode.PROPERTY_INSERT_SUCCESS, id));
     }
 
 
