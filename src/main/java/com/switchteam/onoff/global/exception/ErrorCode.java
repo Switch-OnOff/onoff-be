@@ -26,7 +26,10 @@ public enum ErrorCode {
     ODCLOUD_PARSING_ERROR(1013, "ODCloud 응답 파싱 실패", HttpStatus.BAD_REQUEST),
     USER_ALREADY_EXISTS(1014, "이미 존재하는 사용자입니다.", HttpStatus.CONFLICT),
     PASSWORD_MISMATCH(1015, "비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST),
-    INVALID_PASSWORD(1016, "비밀번호가 올바르지 않습니다.", HttpStatus.UNAUTHORIZED);
+    INVALID_PASSWORD(1016, "비밀번호가 올바르지 않습니다.", HttpStatus.UNAUTHORIZED),
+    IMAGE_LIMIT_EXCEEDED(1017, "이미지는 최대 5장까지 업로드 가능합니다.", HttpStatus.BAD_REQUEST),
+    POST_IMAGE_NOT_FOUND(1018, "해당 매물의 이미지를 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
+    IMAGE_CONVERSION_FAILED(1019, "이미지 변환에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 
     private final int code;
     private final String message;
