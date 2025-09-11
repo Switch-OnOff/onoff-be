@@ -31,6 +31,7 @@ public class ChatMainConverter {
         }
 
         return ChatMainResponseDto.ChatMainUnitResponseDto.builder()
+                .roomId(room.getRoomId())
                 .myRole(myRole)
                 .otherUserId(otherUser.getUserId())
                 .otherUserName(otherUser.getName())

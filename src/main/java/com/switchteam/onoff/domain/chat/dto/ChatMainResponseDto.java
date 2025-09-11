@@ -16,6 +16,7 @@ public class ChatMainResponseDto {
     @AllArgsConstructor
     @Builder
     public static class ChatMainUnitResponseDto {
+        private Long roomId;
         private ChatRole myRole;
         private Long otherUserId;
         private String otherUserName;
