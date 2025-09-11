@@ -21,11 +21,11 @@ public class ChatMessage {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id", nullable = false)
-    private ChatRoom room;
+    private ChatRoom roomId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id", nullable = false)
-    private User sender;
+    private User senderId;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
