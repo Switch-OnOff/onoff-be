@@ -106,8 +106,6 @@ public class PropertyServiceImpl implements PropertyService {
         return propertyRepository.findDetailById(id);
     }
 
-
-
     @Override
     public void deleteProperty(Long id){
         propertyRepository.deleteById(id);
