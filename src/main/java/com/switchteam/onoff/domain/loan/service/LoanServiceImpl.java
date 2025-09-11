@@ -212,4 +212,10 @@ public class LoanServiceImpl implements LoanService {
         return 0.0;
     }
 
+    @Override
+    public List<Loan> searchByLoanName(String keyword) {
+        return loanRepository.searchByLoanName(keyword);
+    }
+
 }
+

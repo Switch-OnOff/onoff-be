@@ -25,4 +25,7 @@ public interface LoanRepository extends JpaRepository<Loan, Long> {
             @Param("interestType") String interestType,
             @Param("repaymentMethod") String repaymentMethod
     );
+
+    @Query("SELECT l FROM Loan l WHERE l.loanName LIKE %:keyword%")
+    List<Loan> searchByLoanName(@Param("keyword") String keyword);
 }
