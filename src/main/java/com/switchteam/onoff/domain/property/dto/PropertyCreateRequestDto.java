@@ -11,6 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class PropertyCreateRequestDto {
     //Property -----------------------
+    private Long userId;
     private String storeName;
     private String industry;
     private String shopType;

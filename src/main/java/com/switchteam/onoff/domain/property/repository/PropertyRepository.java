@@ -64,6 +64,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     @Query("""
     select new com.switchteam.onoff.domain.property.dto.PropertyDetailDto(
         p.id,
+        p.userId,
         p.storeName,
         p.industry,
         p.shopType,
