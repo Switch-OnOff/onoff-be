@@ -14,6 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class PropertyDetailDto {
     private Long id;
+    private Long userId;
     private String storeName;
     private String industry; //업종
     private String shoType; //상가타입

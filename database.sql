@@ -57,6 +57,7 @@ CREATE TABLE grants (
 -- ==============================
 CREATE TABLE property (
                           id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+                          user_id Long NOT NULL,
                           store_name VARCHAR(255) NOT NULL,
                           industry VARCHAR(100) NOT NULL,
                           shop_type VARCHAR(100) NOT NULL,

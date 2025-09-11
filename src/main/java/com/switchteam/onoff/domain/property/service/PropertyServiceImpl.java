@@ -38,6 +38,7 @@ public class PropertyServiceImpl implements PropertyService {
     @Transactional
     public Long createProperty(PropertyCreateRequestDto request){
         Property property = Property.builder()
+                .userId(request.getUserId())
                 .storeName(request.getStoreName())
                 .industry(request.getIndustry())
                 .shopType(request.getShopType())
