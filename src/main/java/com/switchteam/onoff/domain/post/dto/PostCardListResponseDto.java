@@ -18,5 +18,17 @@ public class PostCardListResponseDto {
         private Long propertyId;
         private Long ownerId;
         private byte[] representativeImage;
+        private AnalysisResult analysisResult;
+
+        @Getter
+        @Setter
+        public static class AnalysisResult {
+            private String industryType;
+            private String businessScale;
+            private String targetCustomer;
+            private String uniqueFeatures;
+            private String imageAnalysis;
+        }
     }
+
 }
