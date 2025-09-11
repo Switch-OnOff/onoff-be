@@ -1,7 +1,8 @@
 package com.switchteam.onoff.domain.property.controller;
 
 import com.switchteam.onoff.domain.property.dto.PropertyCardDto;
-import com.switchteam.onoff.domain.property.dto.PropertyCreateRequest;
+import com.switchteam.onoff.domain.property.dto.PropertyCreateRequestDto;
+import com.switchteam.onoff.domain.property.dto.PropertyLocationResponseDto;
 import com.switchteam.onoff.domain.property.dto.ValidateRequestDto;
 import com.switchteam.onoff.domain.property.service.PropertyService;
 import com.switchteam.onoff.global.common.CustomApiResponse;
@@ -24,7 +25,7 @@ public class PropertyController {
 
     @PostMapping("/")
     @Operation(summary = "매물 정보 등록", description = "매물 정보를 등록합니다.")
-    public ResponseEntity<CustomApiResponse<PropertyCreateRequest>> insertProperty(@RequestBody PropertyCreateRequest request){
+    public ResponseEntity<CustomApiResponse<PropertyCreateRequestDto>> insertProperty(@RequestBody PropertyCreateRequestDto request){
         Long id = propertyService.createProperty(request);
         if(id == null){
             return ResponseEntity.ok(CustomApiResponse.error(ErrorCode.PROPERTY_CREATE_ERROR));
@@ -47,6 +48,13 @@ public class PropertyController {
         return ResponseEntity.ok(
                 CustomApiResponse.success(SuccessCode.PROPERTY_CARD_DATA_BY_ID_SUCCESS, propertyCardDto)
         );
+    }
+
+    @GetMapping("/property_location")
+    @Operation(summary = "매물 위치 데이터 리스트 조회", description = "전체 매물의 위치를 조회합니다.")
+    public ResponseEntity<CustomApiResponse<List<PropertyLocationResponseDto>>> getPropertyLocation(){
+        List<PropertyLocationResponseDto> propertyLocationResponseDtoList = propertyService.getPropertyLocationDataList();
+        return ResponseEntity.ok(CustomApiResponse.success(SuccessCode.PROPERTY_LOCATION_SUCCESS, propertyLocationResponseDtoList));
     }
 
     @DeleteMapping("/{id}")
