@@ -105,11 +105,15 @@ public class AiAnalysisServiceImpl implements AiAnalysisService {
             "businessScale": "예: 소규모, 중규모, 대규모",
             "targetCustomer": "예: 20~30대 젊은층",
             "uniqueFeatures": "예: 독특한 인테리어, 다양한 맥주 종류",
-            "imageAnalysis": "예: 이미지에서 밝고 현대적인 인테리어 확인, 주점 분위기 강조"
+            "imageAnalysis": "예: 이미지에서 밝고 현대적인 인테리어 확인, 주점 분위기이므로 주점으로 변경하기 좋습니다."
         }
         """);
+
+        prompt.append("imageAnalysis 에서는 좀더 핵심형태의 String 으로 ~니다. 형태로 반환하고.\n");
+        prompt.append("내가 폐업자의 입장에서 새로운 창업자에게 가게를 설명해주는 형식으로 작성 할 것.\n");
         prompt.append("레스토랑 같은 범위 말고 치킨집, 한식집, 중식집 처럼 좀더 카테고리를 세분화 할 것.\n");
         prompt.append("위 5개 키만 사용하고, 절대로 다른 키나 설명 텍스트를 추가하지 말 것.\n");
+        prompt.append("분석이 안되는 경우에는 저 형식을 고정하되 imageAnalysis에만 분석을 못했다고 명시 할 것.\n");
         prompt.append("각 항목을 최대한 구체적으로 작성할 것.\n");
 
         return prompt.toString();
