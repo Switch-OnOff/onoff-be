@@ -26,7 +26,7 @@ public class ChatRoomController {
      * @param buyerId  구매자의 고유 식별자
      * @param sellerId 판매자의 고유 식별자
      */
-    @MessageMapping("/chat.createRoom")
+    @MessageMapping("/chat/createRoom")
     public void createRoom(Long buyerId, Long sellerId) {
         User buyer = userService.getUserById(buyerId)
                 .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));

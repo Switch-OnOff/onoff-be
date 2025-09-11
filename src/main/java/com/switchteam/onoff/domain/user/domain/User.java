@@ -22,6 +22,9 @@ public class User {
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
+    @Column(nullable = false, length = 10)
+    private String name;
+
     @Column(nullable = false, unique = true, length = 20)
     private String contact; // 연락처
 

@@ -1,9 +1,9 @@
 package com.switchteam.onoff.domain.grants.controller;
 
 import com.switchteam.onoff.domain.grants.domain.Grants;
-import com.switchteam.onoff.domain.grants.dto.request.GrantValidateRequest;
-import com.switchteam.onoff.domain.grants.dto.response.GrantCheckResponse;
-import com.switchteam.onoff.domain.grants.dto.response.GrantValidateResponse;
+import com.switchteam.onoff.domain.grants.dto.request.GrantValidateRequestDto;
+import com.switchteam.onoff.domain.grants.dto.response.GrantCheckResponseDto;
+import com.switchteam.onoff.domain.grants.dto.response.GrantValidateResponseDto;
 import com.switchteam.onoff.domain.grants.service.GrantsService;
 import com.switchteam.onoff.global.common.CustomApiResponse;
 import com.switchteam.onoff.global.common.SuccessCode;
@@ -42,11 +42,11 @@ public class GrantsController {
 
     @PostMapping("/api/grants/{serviceId}/validate")
     @Operation(summary = "지원여부 결정", description = "내 상황 입력하고 지원받을 수 있는지 확인할때 사용하는 API")
-    public ResponseEntity<CustomApiResponse<GrantValidateResponse>> grantValidate(
+    public ResponseEntity<CustomApiResponse<GrantValidateResponseDto>> grantValidate(
             @PathVariable Long serviceId,
-            @RequestBody GrantValidateRequest grantValidateRequest) {
+            @RequestBody GrantValidateRequestDto grantValidateRequest) {
 
-        GrantValidateResponse grantValidateResponse = grantsService.grantsValidate(serviceId, grantValidateRequest);
+        GrantValidateResponseDto grantValidateResponse = grantsService.grantsValidate(serviceId, grantValidateRequest);
 
         return ResponseEntity.ok(CustomApiResponse.success(
                 SuccessCode.GRANT_VALIDATE_SUCCESS, grantValidateResponse));
@@ -55,8 +55,8 @@ public class GrantsController {
 
     @GetMapping("/api/grants/{serviceId}/checkList")
     @Operation(summary = "선정기준과 구비서류", description = "지원을 받을 있다면 선정기준과 구비여부 리스트 보여주는 API")
-    public ResponseEntity<CustomApiResponse<GrantCheckResponse>> checkGrantsList(@PathVariable Long serviceId) {
-        GrantCheckResponse grantsList = grantsService.checkGrantsList(serviceId);
+    public ResponseEntity<CustomApiResponse<GrantCheckResponseDto>> checkGrantsList(@PathVariable Long serviceId) {
+        GrantCheckResponseDto grantsList = grantsService.checkGrantsList(serviceId);
         return ResponseEntity.ok(CustomApiResponse.success(
                 SuccessCode.GRANT_CHECK_SUCCESS, grantsList));
 
@@ -84,5 +84,15 @@ public class GrantsController {
                 CustomApiResponse.success(SuccessCode.GRANT_FILTER_SUCCESS, filteredGrants)
         );
     }
+
+    @GetMapping("/api/grants/{serviceId}")
+    @Operation(summary = "지원금 상세 조회", description = "serviceId로 지원금의 모든 정보를 조회하는 API")
+    public ResponseEntity<CustomApiResponse<Grants>> getGrantById(@PathVariable Long serviceId) {
+        Grants grant = grantsService.getGrantById(serviceId);
+        return ResponseEntity.ok(
+                CustomApiResponse.success(SuccessCode.GRANT_DETAIL_SUCCESS, grant)
+        );
+    }
+
 
 }

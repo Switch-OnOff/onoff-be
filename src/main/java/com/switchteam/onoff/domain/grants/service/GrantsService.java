@@ -1,9 +1,9 @@
 package com.switchteam.onoff.domain.grants.service;
 
 import com.switchteam.onoff.domain.grants.domain.Grants;
-import com.switchteam.onoff.domain.grants.dto.request.GrantValidateRequest;
-import com.switchteam.onoff.domain.grants.dto.response.GrantCheckResponse;
-import com.switchteam.onoff.domain.grants.dto.response.GrantValidateResponse;
+import com.switchteam.onoff.domain.grants.dto.request.GrantValidateRequestDto;
+import com.switchteam.onoff.domain.grants.dto.response.GrantCheckResponseDto;
+import com.switchteam.onoff.domain.grants.dto.response.GrantValidateResponseDto;
 import com.switchteam.onoff.domain.grants.repository.GrantsRepository;
 import com.switchteam.onoff.global.exception.CustomException;
 import com.switchteam.onoff.global.exception.ErrorCode;
@@ -36,27 +36,27 @@ public class GrantsService {
     //    return grantsRepository.searchGrantsByFilters(grantsFilterRequest);
     //}
 
-    public GrantValidateResponse grantsValidate(Long serviceId, GrantValidateRequest grantValidateRequest) {
+    public GrantValidateResponseDto grantsValidate(Long serviceId, GrantValidateRequestDto grantValidateRequestDto) {
         Grants grant = grantsRepository.findById(serviceId)
                 .orElseThrow(() -> new CustomException(ErrorCode.GRANT_NOT_FOUND));
 
-        GrantValidateResponse grantValidateResponse = new GrantValidateResponse();
+        GrantValidateResponseDto grantValidateResponse = new GrantValidateResponseDto();
 
         // 현재 상황 검증
-        if (grant.getServiceStatus() != null && !grant.getServiceStatus().contains(grantValidateRequest.getServiceStatus())) {
+        if (grant.getServiceStatus() != null && !grant.getServiceStatus().contains(grantValidateRequestDto.getServiceStatus())) {
             grantValidateResponse.setValidStatus(false);
             return grantValidateResponse;
         }
 
         // 지역 검증
-        if (grant.getLocation() != null && !grant.getLocation().contains(grantValidateRequest.getLocation())) {
+        if (grant.getLocation() != null && !grant.getLocation().contains(grantValidateRequestDto.getLocation())) {
             grantValidateResponse.setValidStatus(false);
             return grantValidateResponse;
         }
 
         // 업종 검증
         if (grant.getIndustry() != null && !grant.getIndustry().isEmpty()
-                && !grant.getIndustry().contains(grantValidateRequest.getIndustry())) {
+                && !grant.getIndustry().contains(grantValidateRequestDto.getIndustry())) {
             grantValidateResponse.setValidStatus(false);
             return grantValidateResponse;
         }
@@ -65,11 +65,11 @@ public class GrantsService {
         return grantValidateResponse;
     }
 
-    public GrantCheckResponse checkGrantsList(Long serviceId) {
+    public GrantCheckResponseDto checkGrantsList(Long serviceId) {
         Grants grant = grantsRepository.findById(serviceId)
                 .orElseThrow(() -> new CustomException(ErrorCode.GRANT_NOT_FOUND));
 
-        return GrantCheckResponse.builder()
+        return GrantCheckResponseDto.builder()
                 .selectionCriteria(grant.getSelectionCriteria())
                 .requiredDocuments(grant.getRequiredDocuments())
                 .build();
@@ -87,5 +87,11 @@ public class GrantsService {
     public List<Grants> filterGrants(String serviceStatus, String location, String industry) {
         return grantsRepository.searchGrantsByFilters(serviceStatus, location, industry);
     }
+
+    public Grants getGrantById(Long serviceId) {
+        return grantsRepository.findById(serviceId)
+                .orElseThrow(() -> new CustomException(ErrorCode.GRANT_NOT_FOUND));
+    }
+
 
 }
