@@ -1,9 +1,6 @@
 package com.switchteam.onoff.domain.property.service;
 
-import com.switchteam.onoff.domain.property.dto.PropertyCardDto;
-import com.switchteam.onoff.domain.property.dto.PropertyCreateRequestDto;
-import com.switchteam.onoff.domain.property.dto.PropertyLocationResponseDto;
-import com.switchteam.onoff.domain.property.dto.ValidateRequestDto;
+import com.switchteam.onoff.domain.property.dto.*;
 
 import java.util.List;
 
@@ -19,6 +16,8 @@ public interface PropertyService {
     PropertyCardDto findCardDataById(Long id);
 
     List<PropertyLocationResponseDto> getPropertyLocationDataList();
+
+    PropertyDetailDto getPropertyDetailById(Long id);
 
     boolean isValid(ValidateRequestDto request);
 

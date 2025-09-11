@@ -16,19 +16,19 @@ public class PropertyLeaseCost {
     private String transactionType;
 
     @Column(name = "deposit")
-    private int deposit;
+    private Integer  deposit;
 
     @Column(name = "mgmt_fee")
-    private int mgmtFee;
+    private Integer  mgmtFee;
 
     @Column(name = "premium")
-    private int premium;
+    private Integer  premium;
 
     @Column(name = "rent")
-    private int rent;
+    private Integer  rent;
 
     @Column(name = "sale_price")
-    private int salePrice;
+    private Integer  salePrice;
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId

@@ -28,7 +28,8 @@ public enum SuccessCode {
     POSTS_FETCH_SUCCESS(213, "매물 글 목록 조회 성공"),
     LOAN_SEARCH_SUCCESS(210, "대출 검색 성공"),
     DELETE_PROPERTY_SUCCESS(200, "매물 데이터 삭제 성공"),
-    PROPERTY_LOCATION_SUCCESS(200, "매물 위치 데이터 리스트 조회 성공");
+    PROPERTY_LOCATION_SUCCESS(200, "매물 위치 데이터 리스트 조회 성공"),
+    PROPERTY_DETAIL_SUCCESS(200, "매물 상세정보 조회 성공");
 
     private final int code;
     private final String message;
