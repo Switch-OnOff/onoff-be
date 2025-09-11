@@ -35,10 +35,10 @@ public class User {
     @Column(nullable = false)
     private String password; // 암호화 저장
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
     // User : Post = 1 : N
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<Post> posts = new ArrayList<>();
+    private List<Post> posts;
 }

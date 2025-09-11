@@ -27,5 +27,5 @@ public class ChatRoom {
     @JoinColumn(name = "seller_id", nullable = false)
     private User seller;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 }

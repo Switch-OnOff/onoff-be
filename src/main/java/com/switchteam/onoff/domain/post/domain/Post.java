@@ -49,7 +49,7 @@ public class Post {
     // Post : PostImage = 1 : N
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<PostImage> images = new ArrayList<>();
+    private List<PostImage> images;
 
     public void addImage(PostImage image) {
         if (images.size() > 5) {

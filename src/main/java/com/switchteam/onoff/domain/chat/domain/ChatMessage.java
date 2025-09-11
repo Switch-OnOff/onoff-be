@@ -30,5 +30,5 @@ public class ChatMessage {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    private LocalDateTime sentAt = LocalDateTime.now();
+    private LocalDateTime sentAt;
 }
