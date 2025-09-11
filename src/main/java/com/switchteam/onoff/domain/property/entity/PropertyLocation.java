@@ -1,9 +1,12 @@
 package com.switchteam.onoff.domain.property.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "property_location")
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor @Builder
 public class PropertyLocation {
 
     @Id
