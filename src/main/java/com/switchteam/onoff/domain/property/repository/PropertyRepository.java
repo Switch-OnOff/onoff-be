@@ -15,6 +15,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
         select new com.switchteam.onoff.domain.property.dto.PropertyCardDto(
             p.id,
             p.industry,
+            lc.transactionType,
             lc.rent,
             lc.deposit,
             lc.salePrice,
@@ -32,6 +33,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     select new com.switchteam.onoff.domain.property.dto.PropertyCardDto(
         p.id,
         p.industry,
+        lc.transactionType,
         lc.rent,
         lc.deposit,
         lc.salePrice,
