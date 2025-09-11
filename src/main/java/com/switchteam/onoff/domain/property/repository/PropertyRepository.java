@@ -1,6 +1,7 @@
 package com.switchteam.onoff.domain.property.repository;
 
 import com.switchteam.onoff.domain.property.dto.PropertyCardDto;
+import com.switchteam.onoff.domain.property.dto.PropertyLocationResponseDto;
 import com.switchteam.onoff.domain.property.entity.Property;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +16,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
         select new com.switchteam.onoff.domain.property.dto.PropertyCardDto(
             p.id,
             p.industry,
+            lc.transactionType,
             lc.rent,
             lc.deposit,
             lc.salePrice,
@@ -32,6 +34,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     select new com.switchteam.onoff.domain.property.dto.PropertyCardDto(
         p.id,
         p.industry,
+        lc.transactionType,
         lc.rent,
         lc.deposit,
         lc.salePrice,
@@ -45,4 +48,15 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     where p.id = :id
     """)
     Optional<PropertyCardDto> findCardById(@Param("id") Long id);
+
+    @Query("""
+    select new com.switchteam.onoff.domain.property.dto.PropertyLocationResponseDto(
+        p.id,
+        loc.lat,
+        loc.lng
+    )
+    from Property p
+        join p.location loc
+""")
+    List<PropertyLocationResponseDto> findAllLocations();
 }

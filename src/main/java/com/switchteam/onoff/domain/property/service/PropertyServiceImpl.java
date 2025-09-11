@@ -3,7 +3,8 @@ package com.switchteam.onoff.domain.property.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.switchteam.onoff.domain.property.dto.PropertyCardDto;
-import com.switchteam.onoff.domain.property.dto.PropertyCreateRequest;
+import com.switchteam.onoff.domain.property.dto.PropertyCreateRequestDto;
+import com.switchteam.onoff.domain.property.dto.PropertyLocationResponseDto;
 import com.switchteam.onoff.domain.property.dto.ValidateRequestDto;
 import com.switchteam.onoff.domain.property.entity.Property;
 import com.switchteam.onoff.domain.property.entity.PropertyLeaseCost;
@@ -38,7 +39,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     @Transactional
-    public Long createProperty(PropertyCreateRequest request){
+    public Long createProperty(PropertyCreateRequestDto request){
         Property property = Property.builder()
                 .storeName(request.getStoreName())
                 .industry(request.getIndustry())
@@ -96,6 +97,17 @@ public class PropertyServiceImpl implements PropertyService {
     public PropertyCardDto findCardDataById(Long id) {
         return propertyRepository.findCardById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Property not found with id=" + id));
+    }
+
+    @Override
+    public List<PropertyLocationResponseDto> getPropertyLocationDataList(){
+        return propertyRepository.findAllLocations();
+    }
+
+
+    @Override
+    public void deleteProperty(Long id){
+        propertyRepository.deleteById(id);
     }
 
     @Override
