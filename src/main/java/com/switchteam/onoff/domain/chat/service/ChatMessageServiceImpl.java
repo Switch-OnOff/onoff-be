@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +22,10 @@ public class ChatMessageServiceImpl implements ChatMessageService {
     @Override
     public List<ChatMessage> getMessagesByRoomId(Long roomId) {
         return chatMessageRepository.findAllByRoom_RoomIdOrderBySentAtAsc(roomId);
+    }
+
+    @Override
+    public Optional<ChatMessage> getLastMessageByRoomId(Long roomId) {
+        return chatMessageRepository.findTopByRoom_RoomIdOrderBySentAtDesc(roomId);
     }
 }
