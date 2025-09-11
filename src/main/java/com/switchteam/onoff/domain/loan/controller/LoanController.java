@@ -62,5 +62,14 @@ public class LoanController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/api/loan/search")
+    @Operation(summary = "대출 이름 검색", description = "loan_name을 키워드로 검색합니다")
+    public ResponseEntity<CustomApiResponse<List<Loan>>> searchLoans(@RequestParam String keyword) {
+        List<Loan> searchedLoans = loanService.searchByLoanName(keyword);
+        return ResponseEntity.ok(
+                CustomApiResponse.success(SuccessCode.LOAN_SEARCH_SUCCESS, searchedLoans)
+        );
+    }
+
 
 }

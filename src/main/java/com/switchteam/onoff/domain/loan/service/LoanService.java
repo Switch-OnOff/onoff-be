@@ -17,4 +17,5 @@ public interface LoanService {
 
     LoanEvaluateResponseDto evaluateLoan(Long loanId, LoanEvaluateRequestDto request);
 
+    List<Loan> searchByLoanName(String keyword);
 }
