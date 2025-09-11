@@ -1,32 +1,43 @@
 package com.switchteam.onoff.domain.chat.controller;
 
 import com.switchteam.onoff.domain.chat.domain.ChatMessage;
+import com.switchteam.onoff.domain.chat.domain.ChatRoom;
+import com.switchteam.onoff.domain.chat.dto.ChatMessageRequestDto;
+import com.switchteam.onoff.domain.chat.dto.ChatMessageResponseDto;
+import com.switchteam.onoff.domain.chat.service.ChatMessageService;
 import com.switchteam.onoff.domain.chat.service.ChatMessageServiceImpl;
+import com.switchteam.onoff.domain.chat.service.ChatRoomService;
+import com.switchteam.onoff.domain.user.domain.User;
+import com.switchteam.onoff.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
+import java.time.LocalDateTime;
+
 @Controller
 @RequiredArgsConstructor
 public class ChatMessageController {
 
     private final SimpMessagingTemplate template;
-    private final ChatMessageServiceImpl chatMessageService;
+    private final ChatMessageService chatMessageService; // 인터페이스 기준
 
-    /**
-     * 채팅 메시지 전송을 처리합니다. 제공된 메시지를 데이터베이스에 저장하고
-     * 해당 채팅방의 모든 구독자에게 브로드캐스트합니다.
-     *
-     * @param message 전송될 채팅 메시지. 발신자 정보, 메시지 내용, 소속 채팅방 등의 정보를 포함합니다.
-     */
     @MessageMapping("/chat/sendMessage")
-    public void sendMessage(@Payload ChatMessage message) {
-        // 1. DB 저장
-        ChatMessage savedMessage = chatMessageService.saveMessage(message);
+    public void sendMessage(@Payload ChatMessageRequestDto dto) {
+        // 서비스에서 저장 및 전송 처리
+        ChatMessage savedMessage = chatMessageService.sendMessage(dto);
 
-        // 2. 구독자에게 전송
-        template.convertAndSend("/topic/chat/" + savedMessage.getRoom().getRoomId(), savedMessage);
+        ChatMessageResponseDto response = new ChatMessageResponseDto(
+                savedMessage.getChatMessageId(),
+                savedMessage.getRoomId().getRoomId(),
+                savedMessage.getSenderId().getUserId(),
+                savedMessage.getContent(),
+                savedMessage.getSentAt()
+        );
+
+        // 구독자에게 전송
+        template.convertAndSend("/topic/chat/" + response.getRoomId(), response);
     }
 }

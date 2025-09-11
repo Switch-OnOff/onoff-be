@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 @Service
 @RequiredArgsConstructor
 public class ChatHistoryServiceImpl implements ChatHistoryService {
@@ -29,7 +27,7 @@ public class ChatHistoryServiceImpl implements ChatHistoryService {
         List<ChatRoomMessageResponseDto.ChatMessageUnitDto> dtos = messages.stream()
                 .map(m -> ChatRoomMessageResponseDto.ChatMessageUnitDto.builder()
                         .chatMessageId(m.getChatMessageId())
-                        .senderId(m.getSender().getUserId())
+                        .senderId(m.getSenderId().getUserId())
                         .content(m.getContent())
                         .sentAt(m.getSentAt())
                         .build())
