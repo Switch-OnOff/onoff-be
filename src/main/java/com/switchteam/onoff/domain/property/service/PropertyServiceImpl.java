@@ -2,10 +2,7 @@ package com.switchteam.onoff.domain.property.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.switchteam.onoff.domain.property.dto.PropertyCardDto;
-import com.switchteam.onoff.domain.property.dto.PropertyCreateRequestDto;
-import com.switchteam.onoff.domain.property.dto.PropertyLocationResponseDto;
-import com.switchteam.onoff.domain.property.dto.ValidateRequestDto;
+import com.switchteam.onoff.domain.property.dto.*;
 import com.switchteam.onoff.domain.property.entity.Property;
 import com.switchteam.onoff.domain.property.entity.PropertyLeaseCost;
 import com.switchteam.onoff.domain.property.entity.PropertyLocation;
@@ -103,6 +100,12 @@ public class PropertyServiceImpl implements PropertyService {
     public List<PropertyLocationResponseDto> getPropertyLocationDataList(){
         return propertyRepository.findAllLocations();
     }
+
+    @Override
+    public PropertyDetailDto getPropertyDetailById(Long id){
+        return propertyRepository.findDetailById(id);
+    }
+
 
 
     @Override

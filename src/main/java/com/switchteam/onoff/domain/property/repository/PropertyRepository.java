@@ -1,6 +1,7 @@
 package com.switchteam.onoff.domain.property.repository;
 
 import com.switchteam.onoff.domain.property.dto.PropertyCardDto;
+import com.switchteam.onoff.domain.property.dto.PropertyDetailDto;
 import com.switchteam.onoff.domain.property.dto.PropertyLocationResponseDto;
 import com.switchteam.onoff.domain.property.entity.Property;
 import org.springframework.data.repository.query.Param;
@@ -57,6 +58,44 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     )
     from Property p
         join p.location loc
-""")
+    """)
     List<PropertyLocationResponseDto> findAllLocations();
+
+    @Query("""
+    select new com.switchteam.onoff.domain.property.dto.PropertyDetailDto(
+        p.id,
+        p.storeName,
+        p.industry,
+        p.shopType,
+        p.transferType,
+        p.transferDate,
+        p.currentFloor,
+        p.totalFloor,
+        p.parkingType,
+        p.parkingCount,
+        p.parkingPaid,
+        p.restroom,
+        p.deliveryLevel,
+        p.takeoutLevel,
+        p.supplyArea,
+        p.exclusiveArea,
+        p.description,
+        p.createdAt,
+        p.updatedAt,
+        lc.transactionType,
+        lc.deposit,
+        lc.mgmtFee,
+        lc.premium,
+        lc.rent,
+        lc.salePrice,
+        loc.address,
+        loc.lat,
+        loc.lng
+    )
+    from Property p
+        join p.leaseCost lc
+        join p.location loc
+    where p.id = :id
+    """)
+    PropertyDetailDto findDetailById(@Param("id") Long id);
 }

@@ -1,9 +1,6 @@
 package com.switchteam.onoff.domain.property.controller;
 
-import com.switchteam.onoff.domain.property.dto.PropertyCardDto;
-import com.switchteam.onoff.domain.property.dto.PropertyCreateRequestDto;
-import com.switchteam.onoff.domain.property.dto.PropertyLocationResponseDto;
-import com.switchteam.onoff.domain.property.dto.ValidateRequestDto;
+import com.switchteam.onoff.domain.property.dto.*;
 import com.switchteam.onoff.domain.property.service.PropertyService;
 import com.switchteam.onoff.global.common.CustomApiResponse;
 import com.switchteam.onoff.global.common.SuccessCode;
@@ -50,11 +47,18 @@ public class PropertyController {
         );
     }
 
-    @GetMapping("/property_location")
+    @GetMapping("/location")
     @Operation(summary = "매물 위치 데이터 리스트 조회", description = "전체 매물의 위치를 조회합니다.")
     public ResponseEntity<CustomApiResponse<List<PropertyLocationResponseDto>>> getPropertyLocation(){
         List<PropertyLocationResponseDto> propertyLocationResponseDtoList = propertyService.getPropertyLocationDataList();
         return ResponseEntity.ok(CustomApiResponse.success(SuccessCode.PROPERTY_LOCATION_SUCCESS, propertyLocationResponseDtoList));
+    }
+
+    @GetMapping("/detail/{id}")
+    @Operation(summary = "매물 상세정보 조회", description = "해당 id의 매물 상세정보를 조회합니다.")
+    public ResponseEntity<CustomApiResponse<PropertyDetailDto>> getPropertyDetail(@PathVariable Long id) {
+        PropertyDetailDto dto = propertyService.getPropertyDetailById(id);
+        return ResponseEntity.ok(CustomApiResponse.success(SuccessCode.PROPERTY_DETAIL_SUCCESS, dto));
     }
 
     @DeleteMapping("/{id}")
